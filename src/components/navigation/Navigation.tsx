@@ -12,6 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import useUserStore from "../../store/userStore";
 import { useEffect } from "react";
+import useModalStore from "../../store/modalStore";
+import SearchModal from "../modal/SearchModal";
 
 const Nav = styled.nav`
   width: 300px;
@@ -46,6 +48,7 @@ const NavItemUl = styled.ul`
 const NavItemLi = styled.li``;
 
 const Navigation = () => {
+  const { isOpenSearchModal, openSearchModal } = useModalStore();
   const { isLoggedIn, logout } = useUserStore();
   const navigate = useNavigate();
 
@@ -77,6 +80,7 @@ const Navigation = () => {
                 icon={faMagnifyingGlass}
                 size="xl"
                 text="Search"
+                onClick={openSearchModal}
               />
             </NavItemLi>
             <NavItemLi>
@@ -95,6 +99,7 @@ const Navigation = () => {
           </NavItemLi>
         </NavItemUl>
       </Nav>
+      {isOpenSearchModal && <SearchModal />}
     </>
   );
 };
