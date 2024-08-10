@@ -6,6 +6,7 @@ import { TUser } from "../../types";
 import useUserStore from "../../store/userStore";
 import axios from "axios";
 import { HOST } from "../../config";
+import { useNavigate } from "react-router-dom";
 
 type SignInRequest = {
   username: string;
@@ -49,6 +50,7 @@ const Button = styled.button`
 `;
 
 const SignInForm = () => {
+  const navigate = useNavigate();
   const { login } = useUserStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -89,6 +91,8 @@ const SignInForm = () => {
 
         console.log(user);
         login(user);
+
+        navigate("/");
       })
       .catch(() => {
         alert("로그인에 실패했습니다.");

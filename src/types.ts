@@ -6,3 +6,13 @@ export type TUser = {
   imageData: string | null;
   name: string;
 };
+
+export type TPost = {
+  id: number;
+  user: TUser;
+  imageData: string;
+  content: string;
+  likeCount: number;
+  isLike: boolean;
+  createdAt: string;
+};

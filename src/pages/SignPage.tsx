@@ -3,9 +3,11 @@
 import styled from "styled-components";
 import iphone from "../assets/iphone.png";
 import logo from "../assets/logo.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignInForm from "../components/sign/SignInForm";
 import SignUpForm from "../components/sign/SignUpForm";
+import useUserStore from "../store/userStore";
+import { useNavigate } from "react-router-dom";
 
 const Main = styled.main`
   width: 100vw;
@@ -72,7 +74,15 @@ const SwitchSpan = styled.span`
 `;
 
 const SignPage = () => {
+  const { isLoggedIn } = useUserStore();
+  const navigate = useNavigate();
   const [isSignIn, setIsSignIn] = useState(true);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   const onClickSwitchSign = () => {
     setIsSignIn(!isSignIn);
